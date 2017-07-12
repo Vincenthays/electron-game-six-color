@@ -26,11 +26,30 @@
 } 
 
 .view-game .menu button {
+    border: 0px;
+    cursor: pointer;
+}
+
+.view-game .menu-right button {
     margin-right: auto;
     height: 7vh;
     width: 7vh;
     max-height: 7vw;
     max-width: 7vw;
-    border: 0px;
-    cursor: pointer;
-} 
+}
+
+.view-game .menu-left h2 {
+    margin: 0px auto 0px auto;
+}
+
+.view-game .menu-left button {
+    width: 100%;
+    height: 30px;
+    background-color: #2ecc71;
+}
+
+.view-game .menu-left select {
+    width: 100%;
+    height: 30px;
+    background-color: #2980b9;
+}

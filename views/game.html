@@ -1,5 +1,18 @@
-    <div class="view-game">
-        <div id="myCanvas">
+<div class="view-game">
+
+    <div class="menu menu-left">
+        <h2>Options</h2>
+        <button ng-click="data.init()"
+                ng-style="{'margin-top': '3vh'}">
+            Reset
+        </button>
+        <select ng-model="data.nbPlayers"
+                ng-change="data.initPlayers()">
+            <option ng-repeat="(i, v) in nbPlayersOptions" value="{{i}}">{{v}}</option>
+        </select>
+    </div>
+    
+    <div id="myCanvas">
         <ng-repeat ng-repeat="lines in data.tableau">
             <ng-repeat ng-repeat="case in lines">
                 <div ng-style="caseStyle(case)">{{case.playerId}}</div>
@@ -7,14 +20,10 @@
         </ng-repeat>
     </div>
 
-    <div class="menu">
+    <div class="menu menu-right">
         <button ng-repeat="color in data.colors"
-        ng-style="{ 'background-color': '{{color}}' }" 
-        ng-click="data.play(1, color)">
-        </button>
-        <button ng-click="data.init()"
-        ng-style="{'margin-top': '3vh'}">
-            init
+                ng-style="{ 'background-color': '{{color}}' }" 
+                ng-click="data.play(1, color)">
         </button>
     </div>
 </div>  

@@ -6,7 +6,8 @@ class GameEngine {
         this.colors = ['#2ecc71', '#3498db', '#9b59b6', '#e74c3c', '#95a5a6', '#2c3e50', '#e67e22'];
         this.caseHeight = 100/this.height + '%';
         this.caseWidth = 100/this.width + '%';
-        this.players = new Array(nbPlayers);
+        this.nbPlayers = nbPlayers;
+        this.players = new Array();
         this.postitionsStart = [
             { 'x': 0, 'y': 0 }, 
             { 'x': this.width-1, 'y': this.height-1},
@@ -29,10 +30,13 @@ class GameEngine {
                     'positionY': 100*i/this.height+'%'
                 }
             }
-        } 
+        }
+        return this;
+    }
 
-        // Init players
-        for (var i=0; i<this.players.length; i++) {
+    initPlayers() {
+        this.players = new Array(this.nbPlayers);
+        for (var i=0; i<this.nbPlayers; i++) {
             this.players[i] = {
                 'id': i,
                 'name': 'Player ' + i,
@@ -42,8 +46,6 @@ class GameEngine {
                         [this.postitionsStart[i].x].playerId = i;
             
         }
-
-        return this;
     }
 
     play(playerId, color) {
