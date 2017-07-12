@@ -1,0 +1,25 @@
+nav {
+    width: 100vw;
+    height: 30px;
+    display: flex;
+}
+
+nav a {
+    flex: 1;
+    height: 100%;
+    margin: auto;
+    text-decoration: none;
+    color: white;
+    background-color: #BF55EC;
+    display: flex;
+}
+
+nav a div {
+    margin: auto;
+    text-decoration: none;
+    color: white;
+}
+
+nav a.is-active {
+    background-color: var(--main-bg-color);
+}

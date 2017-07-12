@@ -1,0 +1,20 @@
+    <div class="view-game">
+        <div id="myCanvas">
+        <ng-repeat ng-repeat="lines in data.tableau">
+            <ng-repeat ng-repeat="case in lines">
+                <div ng-style="caseStyle(case)">{{case.playerId}}</div>
+            </ng-repeat>
+        </ng-repeat>
+    </div>
+
+    <div class="menu">
+        <button ng-repeat="color in data.colors"
+        ng-style="{ 'background-color': '{{color}}' }" 
+        ng-click="data.play(1, color)">
+        </button>
+        <button ng-click="data.init()"
+        ng-style="{'margin-top': '3vh'}">
+            init
+        </button>
+    </div>
+</div>  

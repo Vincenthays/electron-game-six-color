@@ -1,0 +1,36 @@
+.view-game {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+}
+
+.view-game #myCanvas {
+    margin: auto;
+    width: 70vh;
+    height: 70vh;
+    max-width: 70vw;
+    max-height: 70vw;
+    position: relative;
+}
+
+.view-game #myCanvas div {
+    position: absolute;
+}
+
+.view-game .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 13vw;
+} 
+
+.view-game .menu button {
+    margin-right: auto;
+    height: 7vh;
+    width: 7vh;
+    max-height: 7vw;
+    max-width: 7vw;
+    border: 0px;
+    cursor: pointer;
+} 

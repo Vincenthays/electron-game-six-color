@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six colors</title>
+    <!-- Style -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/header.css">        
+    <link rel="stylesheet" href="css/views/home.css">
+    <link rel="stylesheet" href="css/views/menu.css">
+    <link rel="stylesheet" href="css/views/game.css">    
+</head>
+<body>
+
+    <nav ng-controller="navTabCtrl">
+        <a ng-repeat="tab in tabs"
+        ng-class="tab.active ? 'is-active' : ''"
+        ng-click="changeTab(tab)"
+        href="{{tab.url}}">
+            <div>{{tab.name}}</div>
+        </a>
+    </nav>
+
+    <div ng-view class="container"></div>
+
+    <script src="js/app.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
