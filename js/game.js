@@ -98,7 +98,6 @@ class GameEngine {
         return false;
     }
     
-
     isInTheTableau(x, y) {
         return (
             x>=0 &&
