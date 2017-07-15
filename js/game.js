@@ -31,6 +31,8 @@ class GameEngine {
                 }
             }
         }
+        this.initPlayers();
+        
         return this;
     }
 
