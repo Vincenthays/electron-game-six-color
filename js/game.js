@@ -1,3 +1,12 @@
+class Case {
+    constructor(positionX, positionY, color, playerId) {
+        this.positionX = positionX;
+        this.positionY = positionY;
+        this.color = color;
+        this.playerId = playerId;
+    }
+}
+
 class GameEngine {
     constructor(height, width, nbPlayers) {
         this.height = height;
@@ -23,22 +32,30 @@ class GameEngine {
             this.tableau[i] = new Array(this.width);
             for (var j=0; j<this.width; j++) {
                 var index = Math.floor(Math.random() * this.colors.length);
-                this.tableau[i][j] = {
-                    'color': this.colors[index],
-                    'playerId': null,
-                    'positionX': 100*j/this.width+'%',
-                    'positionY': 100*i/this.height+'%'
-                }
+                this.tableau[i][j] = new Case(
+                    100*j/this.width+'%',
+                    100*i/this.height+'%',
+                    this.colors[index],
+                    null
+                );
             }
         }
         this.initPlayers();
-        
+
         return this;
     }
 
     initPlayers() {
+        // clear the previous settings
+        for (var i=0; i<this.postitionsStart.length; i++) {
+
+            this.tableau[this.postitionsStart[i].y]
+                        [this.postitionsStart[i].x].playerId = null;    
+        }
+        // create the new settings
         this.players = new Array(this.nbPlayers);
         for (var i=0; i<this.nbPlayers; i++) {
+
             this.players[i] = {
                 'id': i,
                 'name': 'Player ' + i,
@@ -46,7 +63,6 @@ class GameEngine {
             // set start positions in the tableau (array)
             this.tableau[this.postitionsStart[i].y]
                         [this.postitionsStart[i].x].playerId = i;
-            
         }
     }
 

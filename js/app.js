@@ -46,7 +46,7 @@ app.controller('gameCtrl', ['$scope', function($scope){
 
     $scope.data = new GameEngine(15, 15, 2).init();
 
-    // console.log($scope.data);
+    console.log($scope.data);
 
     $scope.nbPlayersOptions = {
         2: '2 Players',
