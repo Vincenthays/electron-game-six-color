@@ -83,8 +83,6 @@ class GameEngine {
                 this.currentPlayerId += 1;
             }
         }
-
-        
     }
 
     colorPlay(color) {

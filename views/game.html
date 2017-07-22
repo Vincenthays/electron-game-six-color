@@ -2,7 +2,7 @@
 
     <div class="menu-side menu-left">
         <h2>Options</h2>
-        <button ng-click=""
+        <button ng-click="newMap()"
                 ng-style="{'margin-top': '3vh'}">
             New Map
         </button>
@@ -13,8 +13,10 @@
     </div>
     <div id="center-col">
         <div class="menu-center menu-up">
-            <h2 ng-if="!data.gameFinised">{{data.players[data.currentPlayerId].name}}</h2>
-            <h1 ng-if="data.gameFinised">
+            <h2 ng-if="data.winner == null">
+                {{data.players[data.currentPlayerId].name}}
+            </h2>
+            <h1 ng-if="data.winner != null">
                 {{data.players[data.currentPlayerId].name}} won !!
             </h1>
         </div>

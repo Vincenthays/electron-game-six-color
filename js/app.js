@@ -45,13 +45,14 @@ app.controller('menuCtrl', ['$scope', function($scope){
 app.controller('gameCtrl', ['$scope', function($scope){
 
     var gameEngine = new GameEngine(15, 15, 2).init();
-    
+
     $scope.data = gameEngine;
 
     console.log(gameEngine);
 
     $scope.newMap = function() {
         gameEngine.gameFinised = false;
+        gameEngine.currentPlayerId = 0;
         gameEngine.init();
     }
     
