@@ -13,7 +13,10 @@
     </div>
     <div id="center-col">
         <div class="menu-center menu-up">
-            <h2>{{data.players[data.currentPlayerId].name}}</h2>
+            <h2 ng-if="!data.gameFinised">{{data.players[data.currentPlayerId].name}}</h2>
+            <h1 ng-if="data.gameFinised">
+                {{data.players[data.currentPlayerId].name}} won !!
+            </h1>
         </div>
         <div>
             <div id="canvas">
@@ -38,7 +41,8 @@
     
 
     <div class="menu-side menu-right">
-        <button ng-repeat="color in data.colors"
+        <button ng-if="!data.gameFinised"
+                ng-repeat="color in data.colors"
                 ng-style="{ 'background-color': '{{color}}' }" 
                 ng-click="data.play(color)">
         </button>

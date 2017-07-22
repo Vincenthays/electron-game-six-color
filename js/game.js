@@ -26,6 +26,7 @@ class GameEngine {
         this.nbPlayers = nbPlayers;
         this.players = new Array();
         this.currentPlayerId = 0;
+        this.gameFinised = false;
         this.postitionsStart = [
             { 'x': 0, 'y': 0 }, 
             { 'x': this.width-1, 'y': this.height-1},
@@ -74,12 +75,16 @@ class GameEngine {
 
     play(color) {
         this.colorPlay(color);
-        console.log()
-        if (this.currentPlayerId+2 > this.nbPlayers) {
-            this.currentPlayerId = 0;
-        } else {
-            this.currentPlayerId += 1;
+        // if the game is not finised
+        if (!this.gameFinised) {
+            if (this.currentPlayerId + 2 > this.nbPlayers) {
+                this.currentPlayerId = 0;
+            } else {
+                this.currentPlayerId += 1;
+            }
         }
+
+        
     }
 
     colorPlay(color) {
@@ -93,7 +98,6 @@ class GameEngine {
                     if (this.tableau[i][j].playerId == this.currentPlayerId) {
                         this.tableau[i][j].color = color;
                     }
-                    // console.log(i, j, this.hasNeighborCaseConquer(i, j, playerId));
                     // if the the palyer can conquer this case
                     if (this.tableau[i][j].playerId == null &&
                         this.tableau[i][j].color == color &&
@@ -148,15 +152,27 @@ class GameEngine {
         // clear scores
         for (var i in this.players) {
             this.players[i].score = 0;
-        }
-        // update scores
+        }        
+        // update scores & check if there is a winner
+        var remainCaseToBeConquiered = false;
         for(var i in this.tableau) {
             for(var j in this.tableau[i]) {
                 var playerId = this.tableau[i][j].playerId;
                 if (playerId != null) {
+                    // udpate player score
                     this.players[playerId].score += 1;
+                    // check if a player has conquiered most than half of the cases
+                    if (this.players[playerId].score > this.width*this.height/2) {
+                        this.gameFinised = true;
+                    }
+                } else {
+                    remainCaseToBeConquiered = true;
                 }
             }
+        }
+
+        if (!remainCaseToBeConquiered) {
+            this.gameFinised = true;
         }
     }
     

@@ -19,7 +19,7 @@
 }
 
 .view-game #canvas div.conquered {
-    animation: CaseConquered 1.5s infinite;
+    animation: CaseConquered 1s infinite;
 }
 
 @keyframes CaseConquered {
