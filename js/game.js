@@ -175,5 +175,4 @@ class GameEngine {
             this.gameFinised = true;
         }
     }
-    
 }

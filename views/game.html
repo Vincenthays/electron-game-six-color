@@ -2,9 +2,9 @@
 
     <div class="menu-side menu-left">
         <h2>Options</h2>
-        <button ng-click="data.init()"
+        <button ng-click=""
                 ng-style="{'margin-top': '3vh'}">
-            Reset Map
+            New Map
         </button>
         <select ng-model="data.nbPlayers"
                 ng-change="data.initPlayers()">
@@ -30,12 +30,10 @@
             </div>
         </div>
         <div class="menu-center menu-down">
-            <ng-repeat ng-repeat="player in data.players">
-                <div class="score-box">
-                    <h3>{{player.name}}</h3>
-                    <h3>{{player.score}}</h3>
-                </div>
-            </ng-repeat>
+            <div ng-repeat="player in data.players" class="score-box">
+                <h3>{{player.name}}</h3>
+                <h3>{{player.score}}</h3>
+            </div>
         </div>
     </div>
     

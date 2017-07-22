@@ -44,10 +44,17 @@ app.controller('menuCtrl', ['$scope', function($scope){
 
 app.controller('gameCtrl', ['$scope', function($scope){
 
-    $scope.data = new GameEngine(15, 15, 2).init();
+    var gameEngine = new GameEngine(15, 15, 2).init();
+    
+    $scope.data = gameEngine;
 
-    console.log($scope.data);
+    console.log(gameEngine);
 
+    $scope.newMap = function() {
+        gameEngine.gameFinised = false;
+        gameEngine.init();
+    }
+    
     $scope.nbPlayersOptions = {
         2: '2 Players',
         3: '3 Players',
@@ -59,8 +66,8 @@ app.controller('gameCtrl', ['$scope', function($scope){
             'background-color': caseData.color,
             'left': caseData.positionX,
             'top': caseData.positionY,
-            'width': $scope.data.caseWidth,
-            'height': $scope.data.caseHeight
+            'width': gameEngine.caseWidth,
+            'height': gameEngine.caseHeight
         }
     }
 
