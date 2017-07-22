@@ -5,8 +5,8 @@
     flex-direction: row;
 }
 
-.view-game #myCanvas {
-    margin: auto;
+.view-game #canvas {
+    margin: auto; 
     width: 70vh;
     height: 70vh;
     max-width: 70vw;
@@ -14,18 +14,28 @@
     position: relative;
 }
 
-.view-game #myCanvas div {
+.view-game #canvas div {
     position: absolute;
 }
 
-.view-game .menu {
+.view-game #canvas div.conquered {
+    animation: CaseConquered 1.5s infinite;
+}
+
+@keyframes CaseConquered {
+    0%   {opacity: 1;}
+    50%  {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.view-game .menu-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 13vw;
 } 
 
-.view-game .menu button {
+.view-game .menu-side button {
     border: 0px;
     cursor: pointer;
 }
@@ -51,4 +61,28 @@
 .view-game .menu-left select {
     width: 100%;
     height: 30px;
+}
+
+.view-game #center-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}   
+
+.view-game #center-col .menu-center {
+    flex: 1;
+    display: flex;
+}
+
+.view-game #center-col .menu-center * {
+    margin: auto;
+}
+
+.view-game #center-col .menu-down .score-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.view-game #center-col .menu-center .score-box * {
+    margin: auto;
 }

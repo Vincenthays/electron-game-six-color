@@ -63,4 +63,9 @@ app.controller('gameCtrl', ['$scope', function($scope){
             'height': $scope.data.caseHeight
         }
     }
+
+    $scope.caseClass = function(caseData) {
+        if (caseData.playerId == $scope.data.currentPlayerId) return 'conquered';
+        return '';
+    }
 }])

@@ -1,6 +1,6 @@
 <div class="view-game">
 
-    <div class="menu menu-left">
+    <div class="menu-side menu-left">
         <h2>Options</h2>
         <button ng-click="data.init()"
                 ng-style="{'margin-top': '3vh'}">
@@ -11,19 +11,36 @@
             <option ng-repeat="(i, v) in nbPlayersOptions" value="{{i}}">{{v}}</option>
         </select>
     </div>
-    
-    <div id="myCanvas">
-        <ng-repeat ng-repeat="lines in data.tableau">
-            <ng-repeat ng-repeat="case in lines">
-                <div ng-style="caseStyle(case)">{{case.playerId}}</div>
+    <div id="center-col">
+        <div class="menu-center menu-up">
+            <h2>{{data.players[data.currentPlayerId].name}}</h2>
+        </div>
+        <div>
+            <div id="canvas">
+                <ng-repeat ng-repeat="lines in data.tableau">
+                    <ng-repeat ng-repeat="case in lines">
+                        <div ng-style="caseStyle(case)" ng-class="caseClass(case)">
+                            <!-- {{case.playerId}} -->
+                        </div>
+                    </ng-repeat>
+                </ng-repeat>
+            </div>
+        </div>
+        <div class="menu-center menu-down">
+            <ng-repeat ng-repeat="player in data.players">
+                <div class="score-box">
+                    <h3>{{player.name}}</h3>
+                    <h3>{{player.score}}</h3>
+                </div>
             </ng-repeat>
-        </ng-repeat>
+        </div>
     </div>
+    
 
-    <div class="menu menu-right">
+    <div class="menu-side menu-right">
         <button ng-repeat="color in data.colors"
                 ng-style="{ 'background-color': '{{color}}' }" 
-                ng-click="data.play(1, color)">
+                ng-click="data.play(color)">
         </button>
     </div>
 </div>  

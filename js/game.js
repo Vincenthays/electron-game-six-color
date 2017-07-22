@@ -7,6 +7,14 @@ class Case {
     }
 }
 
+class Player {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+        this.score = 0;
+    }
+}
+
 class GameEngine {
     constructor(height, width, nbPlayers) {
         this.height = height;
@@ -17,6 +25,7 @@ class GameEngine {
         this.caseWidth = 100/this.width + '%';
         this.nbPlayers = nbPlayers;
         this.players = new Array();
+        this.currentPlayerId = 0;
         this.postitionsStart = [
             { 'x': 0, 'y': 0 }, 
             { 'x': this.width-1, 'y': this.height-1},
@@ -46,73 +55,81 @@ class GameEngine {
     }
 
     initPlayers() {
-        // clear the previous settings
+        // clear the previous players
         for (var i=0; i<this.postitionsStart.length; i++) {
 
             this.tableau[this.postitionsStart[i].y]
                         [this.postitionsStart[i].x].playerId = null;    
         }
-        // create the new settings
+        // create the new players
         this.players = new Array(this.nbPlayers);
         for (var i=0; i<this.nbPlayers; i++) {
-
-            this.players[i] = {
-                'id': i,
-                'name': 'Player ' + i,
-            }
+            // register players
+            this.players[i] = new Player (i, 'Player ' + i);
             // set start positions in the tableau (array)
             this.tableau[this.postitionsStart[i].y]
                         [this.postitionsStart[i].x].playerId = i;
         }
     }
 
-    play(playerId, color) {
+    play(color) {
+        this.colorPlay(color);
+        console.log()
+        if (this.currentPlayerId+2 > this.nbPlayers) {
+            this.currentPlayerId = 0;
+        } else {
+            this.currentPlayerId += 1;
+        }
+    }
+
+    colorPlay(color) {
         var keepGoing = true;
         while(keepGoing) {
             keepGoing = false;
             // loop throw all the tableau
-            for (var i=0; i<this.height; i++) {
-                for (var j=0; j<this.width; j++) {
+            for (var i = 0; i < this.height; i++) {
+                for (var j = 0; j < this.width; j++) {
                     // if the case belong to the player
-                    if (this.tableau[i][j].playerId == playerId) {
+                    if (this.tableau[i][j].playerId == this.currentPlayerId) {
                         this.tableau[i][j].color = color;
                     }
                     // console.log(i, j, this.hasNeighborCaseConquer(i, j, playerId));
                     // if the the palyer can conquer this case
                     if (this.tableau[i][j].playerId == null &&
                         this.tableau[i][j].color == color &&
-                        this.hasNeighborCaseConquer(i, j, playerId)
+                        this.hasNeighborCaseConquer(i, j)
                     ) {
-                        this.tableau[i][j].playerId = playerId;
+                        this.tableau[i][j].playerId = this.currentPlayerId;
                         this.tableau[i][j].color = color;
                         keepGoing = true;
                     }
                 }
             }
         }
+        this.updateScores();
     }
 
-    hasNeighborCaseConquer(caseX, caseY, playerId) {
+    hasNeighborCaseConquer(caseX, caseY) {
         var x, y;
 
         x = caseX, y = caseY+1;
         if (this.isInTheTableau(x, y)) {
-            if (this.tableau[x][y].playerId == playerId) return true;
+            if (this.tableau[x][y].playerId == this.currentPlayerId) return true;
         }
 
         x = caseX+1; y = caseY;
         if (this.isInTheTableau(x, y)) {
-            if (this.tableau[x][y].playerId == playerId) return true;
+            if (this.tableau[x][y].playerId == this.currentPlayerId) return true;
         }
 
         x = caseX; y = caseY-1;
         if (this.isInTheTableau(x, y)) {
-            if (this.tableau[x][y].playerId == playerId) return true;
+            if (this.tableau[x][y].playerId == this.currentPlayerId) return true;
         }
 
         x = caseX-1; y = caseY;
         if (this.isInTheTableau(x, y)) {
-            if (this.tableau[x][y].playerId == playerId) return true;
+            if (this.tableau[x][y].playerId == this.currentPlayerId) return true;
         }
 
         return false;
@@ -127,5 +144,20 @@ class GameEngine {
         );
     }
 
+    updateScores() {
+        // clear scores
+        for (var i in this.players) {
+            this.players[i].score = 0;
+        }
+        // update scores
+        for(var i in this.tableau) {
+            for(var j in this.tableau[i]) {
+                var playerId = this.tableau[i][j].playerId;
+                if (playerId != null) {
+                    this.players[playerId].score += 1;
+                }
+            }
+        }
+    }
     
 }
