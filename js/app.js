@@ -9,10 +9,6 @@ app.config(['$routeProvider', ($routeProvider)=>{
             templateUrl: 'views/home.html',
             controller: 'homeCtrl'
         })
-        .when('/menu', {
-            templateUrl: 'views/menu.html',
-            controller: 'menuCtrl'
-        })
         .when('/game', {
             templateUrl: 'views/game.html',
             controller: 'gameCtrl'
@@ -22,7 +18,6 @@ app.config(['$routeProvider', ($routeProvider)=>{
 app.controller('navTabCtrl', ['$scope', function($scope){
     $scope.tabs = [
         {name: 'Home', active: true, url: '#'},
-        {name: 'Menu', active: false, url: '#!menu'},
         {name: 'Game', active: false, url: '#!game'}
     ];
 
@@ -35,10 +30,6 @@ app.controller('navTabCtrl', ['$scope', function($scope){
 }])
 
 app.controller('homeCtrl', ['$scope', function($scope){
-    
-}])
-
-app.controller('menuCtrl', ['$scope', function($scope){
     
 }])
 
