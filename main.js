@@ -11,7 +11,7 @@ app.on('ready', ()=>{
 	mainWindow.loadURL('file:///' + __dirname + '/index.html')
 
 	mainWindow.on('closed', ()=>{
-	mainWindow = null
+		mainWindow = null
 	})	
 
 	mainWindow.webContents.openDevTools()
